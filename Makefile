@@ -6,7 +6,7 @@
 #    By: ambouren <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 14:43:04 by ambouren          #+#    #+#              #
-#    Updated: 2021/11/30 15:35:12 by ambouren         ###   ########.fr        #
+#    Updated: 2021/11/30 16:06:25 by ambouren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ CFLAGS	=	-Wall \
 			-Werror
 INC_PATH=	includes/
 INCLUDES=	ft_printf.h
+BONUS_I	=	ft_printf_bonus.h
 SRC		=	ft_putchar.c \
 			ft_putstr.c \
 			ft_putnbr.c \
@@ -35,10 +36,20 @@ SRC		=	ft_putchar.c \
 			ft_printf.c \
 			ft_strichr.c \
 			ft_putuns.c
+BONUS_S	=	ft_putchar_bonus.c \
+			ft_putstr_bonus.c \
+			ft_putnbr_bonus.c \
+			ft_putmajhex_bonus.c \
+			ft_puthex_bonus.c \
+			ft_putadd_bonus.c \
+			ft_printf_bonus.c \
+			ft_strichr.c \
+			ft_putuns_bonus.c
 SRC_PATH=	$(shell find srcs -type d)
 vpath %.c $(foreach rep, $(SRC_PATH), $(rep))
 
 OBJ_PATH=	obj/
+BONUS_O	=	$(addprefix $(OBJ_PATH),$(BONUS_S:.c=.o))
 OBJ 	=	$(addprefix $(OBJ_PATH),$(SRC:.c=.o))
 
 # COMPILATION
@@ -46,6 +57,8 @@ $(NAME)		:	$(OBJ)
 	$(LC) $@ $^
 
 $(OBJ)		:	$(INC_PATH)$(INCLUDES)
+
+$(BONUS_O)	:	$(INC_PATH)$(BONUS_I)
 
 $(OBJ_PATH)%.o		:	%.c
 	@mkdir -p obj
@@ -60,6 +73,9 @@ clean	:
 fclean	:	clean
 	rm -rf $(NAME)
 
+bonus	:	$(BONUS_O)
+	$(LC) $(NAME) $^
+
 re		:	fclean all
 
-.PHONY	:	all clean fclean re
+.PHONY	:	all clean fclean re bonus
