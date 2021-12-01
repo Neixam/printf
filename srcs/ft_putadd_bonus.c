@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
-int	ft_putadd_aux(unsigned long ad)
+int	ft_putadd_aux(unsigned long ad, int flag)
 {
 	int	ret;
 
@@ -29,7 +29,7 @@ int	ft_putadd_aux(unsigned long ad)
 	return (ret + ft_putadd_aux(ad % 16));
 }
 
-int	ft_putadd(void *a, int flag)
+int	ft_putadd(void *a, t_flag flag)
 {
 	int				ret;
 	unsigned long	ad;
@@ -38,6 +38,6 @@ int	ft_putadd(void *a, int flag)
 		return (ft_putstr("(nil)"));
 	ret = ft_putstr("0x");
 	ad = (unsigned long)a;
-	ret += ft_putadd_aux(ad);
+	ret += ft_putadd_aux(ad, flag);
 	return (ret);
 }

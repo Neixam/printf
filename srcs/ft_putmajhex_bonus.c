@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_putmajhex.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/30 15:34:32 by ambouren          #+#    #+#             */
-/*   Updated: 2021/11/30 15:34:37 by ambouren         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "ft_printf_bonus.h"
 
-#include "ft_printf.h"
-
-int	ft_putmajhex_aux(unsigned int n)
+int	ft_putmajhex_aux(unsigned int n, t_flag flag)
 {
 	int	ret;
 
@@ -24,14 +12,18 @@ int	ft_putmajhex_aux(unsigned int n)
 			n += '0';
 		return (ft_putchar(&n));
 	}
-	ret = ft_putmajhex_aux(n / 16);
-	return (ret + ft_putmajhex_aux(n % 16));
+	ret = ft_putmajhex_aux(n / 16, flag);
+	return (ret + ft_putmajhex_aux(n % 16, flag));
 }
 
-int	ft_putmajhex(void *X)
+int	ft_putmajhex(void *X, t_flag flag)
 {
 	int	n;
+	int	ret;
 
 	n = *((int *)X);
-	return (ft_putmajhex_aux(n));
+	ret = 0;
+	if (flag.flag & 8 && n)
+		ret = ft_putstr("0X", (t_flag)0);
+	return (ret + ft_putmajhex_aux(n));
 }

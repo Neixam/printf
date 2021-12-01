@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_puthex.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/29 18:51:42 by ambouren          #+#    #+#             */
-/*   Updated: 2021/11/29 19:02:41 by ambouren         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "ft_printf_bonus.h"
 
-#include "ft_printf.h"
-
-int	ft_puthex_aux(unsigned int n)
+int	ft_puthex_aux(unsigned int n, t_flag flag)
 {
 	int	ret;
 
@@ -24,14 +12,18 @@ int	ft_puthex_aux(unsigned int n)
 			n += '0';
 		return (ft_putchar(&n));
 	}
-	ret = ft_puthex_aux(n / 16);
-	return (ret + ft_puthex_aux(n % 16));
+	ret = ft_puthex_aux(n / 16, flag);
+	return (ret + ft_puthex_aux(n % 16, flag));
 }
 
-int	ft_puthex(void *x)
+int	ft_puthex(void *x, t_flag flag)
 {
 	int	n;
+	int	ret;
 
 	n = *((int *)x);
+	ret = 0;
+	if (flag.flag & 8 && n)
+		ret = ft_putstr("0x", (t_flag)0);
 	return (ft_puthex_aux(n));
 }

@@ -13,15 +13,21 @@
 #ifndef FT_PRINTF_BONUS_H
 # define FT_PRINTF_BONUS_H
 
-typedef int	(*t_print)(void *, int);
+typedef int	(*t_print)(void *, t_flag);
 
-int	ft_putchar(void *c, int flag);
-int	ft_putstr(void *s, int flag);
-int	ft_putnbr(void *n, int flag);
-int	ft_puthex(void *x, int flag);
-int	ft_putuns(void *u, int flag);
-int	ft_putmajhex(void *x, int flag);
-int	ft_putadd(void *p, int flag);
+typedef struct	s_flag
+{
+	int flag;
+	int size;
+}		t_flag;
+
+int	ft_putchar(void *c, t_flag flag);
+int	ft_putstr(void *s, t_flag flag);
+int	ft_putnbr(void *n, t_flag flag);
+int	ft_puthex(void *x, t_flag flag);
+int	ft_putuns(void *u, t_flag flag);
+int	ft_putmajhex(void *x, t_flag flag);
+int	ft_putadd(void *p, t_flag flag);
 int	ft_printf(const char *fmt, ...);
 int	ft_strichr(char *s, char c);
 

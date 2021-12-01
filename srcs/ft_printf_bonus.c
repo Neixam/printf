@@ -51,13 +51,29 @@ int	ft_choose(int choice, va_list args, int flag)
 	}
 	else
 		ad = va_arg(args, void *);
-	return (ft_print[choice](ad));
+	return (ft_print[choice](ad, flag));
+}
+
+t_flag	ft_flag(const char *fmt, int *i, va_list args)
+{
+	t_flag	flag;
+
+	flag.flag = 0;
+	while (fmt[*i])
+	{
+		ret = ft_strichr("0-.# +", fmt[*i]);
+		if (ret == -1)
+			continue ;
+		flag |= (1 << ret);
+	}
+	flag.size = ft_particular_atoi(fmt, i);
+	return (flag);
 }
 
 int	ft_format(const char *fmt, int *i, va_list args)
 {
-	int	ret;
-	int	flag;
+	int		ret;
+	t_flag	flag;
 
 	flag = ft_flag(fmt, i, args);
 	ret = ft_strichr("cspdiuxX%", fmt[*i]);
