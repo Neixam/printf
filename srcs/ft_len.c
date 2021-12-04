@@ -1,22 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_len.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/29 16:26:24 by ambouren          #+#    #+#             */
-/*   Updated: 2021/12/04 17:21:49 by ambouren         ###   ########.fr       */
+/*   Created: 2021/12/04 15:39:50 by ambouren          #+#    #+#             */
+/*   Updated: 2021/12/04 18:57:28 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "ft_printf_bonus.h"
+#include <unistd.h>
 
-int	ft_putchar(void *c, t_flag flag)
+int	ft_putalign_s(t_flag flag)
 {
-	flag.size--;
-	if (!(IS_MINUS(flag.flag)))
-		return (ft_putalign(flag) + write(1, c, 1));
-	return (write(1, c, 1) + ft_putalign(flag));
+	char	c;
+	int		ret;
+
+	c = ' ';
+	if (IS_ZERO(flag.flag) && !(IS_MINUS(flag.flag)))
+		c = '0';
+	ret = 0;
+	while (flag.size-- > 0)
+		ret += write(1, &c, 1);
+	return (ret);
+}
+
+int	ft_len(unsigned long n, int base)
+{
+	int	len;
+
+	len = 1;
+	while (n / base)
+	{
+		n /= base;
+		len++;
+	}
+	return (len);
 }

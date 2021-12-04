@@ -1,22 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_flag.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/29 16:26:24 by ambouren          #+#    #+#             */
-/*   Updated: 2021/12/04 17:21:49 by ambouren         ###   ########.fr       */
+/*   Created: 2021/12/04 12:45:18 by ambouren          #+#    #+#             */
+/*   Updated: 2021/12/04 14:35:01 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "ft_printf_bonus.h"
 
-int	ft_putchar(void *c, t_flag flag)
+int	ft_particular_atoi(const char *s, int *i)
 {
-	flag.size--;
-	if (!(IS_MINUS(flag.flag)))
-		return (ft_putalign(flag) + write(1, c, 1));
-	return (write(1, c, 1) + ft_putalign(flag));
+	int val;
+
+	val = 0;
+	while (s[*i] <= '9' && s[*i] >= '0')
+		val = val * 10 + s[(*i)++] - '0';
+	return (val);
+}
+
+t_flag	ft_flag(const char *fmt, int *i)
+{
+	t_flag	flag;
+	int		ret;
+
+	flag.flag = 0;
+	while (fmt[*i])
+	{
+		ret = ft_strichr("0-.# +", fmt[*i]);
+		if (ret == -1)
+			break;
+		flag.flag |= (1 << ret);
+		(*i)++;
+	}
+	flag.size = ft_particular_atoi(fmt, i);
+	return (flag);
 }

@@ -6,7 +6,7 @@
 #    By: ambouren <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 14:43:04 by ambouren          #+#    #+#              #
-#    Updated: 2021/11/30 16:06:25 by ambouren         ###   ########.fr        #
+#    Updated: 2021/12/04 15:53:04 by ambouren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,9 @@ BONUS_S	=	ft_putchar_bonus.c \
 			ft_putadd_bonus.c \
 			ft_printf_bonus.c \
 			ft_strichr.c \
-			ft_putuns_bonus.c
+			ft_putuns_bonus.c \
+			ft_len.c \
+			ft_flag.c
 SRC_PATH=	$(shell find srcs -type d)
 vpath %.c $(foreach rep, $(SRC_PATH), $(rep))
 
@@ -62,7 +64,7 @@ $(BONUS_O)	:	$(INC_PATH)$(BONUS_I)
 
 $(OBJ_PATH)%.o		:	%.c
 	@mkdir -p obj
-	$(CC) -o $@ -c $< $(CFLAGS) -I $(INC_PATH)
+	$(CC) -o $@ -c $< $(CFLAGS) -I $(INC_PATH) -g
 
 # RULES
 all		:	$(NAME)
@@ -74,6 +76,7 @@ fclean	:	clean
 	rm -rf $(NAME)
 
 bonus	:	$(BONUS_O)
+	rm -rf $(NAME)
 	$(LC) $(NAME) $^
 
 re		:	fclean all

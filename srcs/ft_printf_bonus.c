@@ -6,11 +6,12 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 16:07:53 by ambouren          #+#    #+#             */
-/*   Updated: 2021/11/30 18:10:10 by ambouren         ###   ########.fr       */
+/*   Updated: 2021/12/04 18:57:36 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
+#include <unistd.h>
 #include <stdarg.h>
 
 void	ft_init(t_print ft_print[9])
@@ -25,7 +26,7 @@ void	ft_init(t_print ft_print[9])
 	ft_print[7] = ft_putmajhex;
 }
 
-int	ft_choose(int choice, va_list args, int flag)
+int	ft_choose(int choice, va_list args, t_flag flag)
 {
 	t_print			ft_print[8];
 	int				n;
@@ -54,31 +55,18 @@ int	ft_choose(int choice, va_list args, int flag)
 	return (ft_print[choice](ad, flag));
 }
 
-t_flag	ft_flag(const char *fmt, int *i, va_list args)
-{
-	t_flag	flag;
-
-	flag.flag = 0;
-	while (fmt[*i])
-	{
-		ret = ft_strichr("0-.# +", fmt[*i]);
-		if (ret == -1)
-			continue ;
-		flag |= (1 << ret);
-	}
-	flag.size = ft_particular_atoi(fmt, i);
-	return (flag);
-}
-
 int	ft_format(const char *fmt, int *i, va_list args)
 {
 	int		ret;
 	t_flag	flag;
+	t_flag	null;
 
-	flag = ft_flag(fmt, i, args);
+	null.flag = 0;
+	null.size = 0;
+	flag = ft_flag(fmt, i);
 	ret = ft_strichr("cspdiuxX%", fmt[*i]);
 	if (ret == 8)
-		return (ft_putchar("%"));
+		return (ft_putchar("%", null));
 	if (ret == -1 && !fmt[*i + 1])
 		return (-1);
 	return (ft_choose(ret, args, flag));
@@ -100,7 +88,7 @@ int	ft_printf(const char *fmt, ...)
 		if (fmt[i] == '%')
 			size += ft_format(fmt, &i, args);
 		else
-			size += ft_putchar(&((char *)fmt)[i]);
+			size += write(1, &((char *)fmt)[i], 1);
 	}
 	va_end(args);
 	return (size);

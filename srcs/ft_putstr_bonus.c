@@ -1,25 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:27:19 by ambouren          #+#    #+#             */
-/*   Updated: 2021/11/30 15:11:36 by ambouren         ###   ########.fr       */
+/*   Updated: 2021/12/04 18:31:55 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
-int	ft_putstr(void *s)
+int	ft_strlen(char *s)
 {
-	int	ret;
+	int	len;
 
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
+}
+
+int	ft_putstr(void *s, t_flag flag)
+{
+	int		ret;
+	int		i;
+	t_flag	null;
+
+	null.flag = 0;
+	null.size = 0;
 	ret = 0;
 	if (!s)
-		return (ft_putstr("(null)"));
-	while (((char *)s)[ret])
-		ret += ft_putchar(&((char *)s)[ret]);
+		return (ft_putstr("(null)", null));
+	flag.size -= ft_strlen((char *)s);
+	if (!(IS_MINUS(flag.flag)))
+		ret += ft_putalign(flag);
+	i = 0;
+	while (((char *)s)[i])
+		ret += ft_putchar(&((char *)s)[i++], null);
+	if (IS_MINUS(flag.flag))
+		return (ret + ft_putalign(flag));
 	return (ret);
 }
