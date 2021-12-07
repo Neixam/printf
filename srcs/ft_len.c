@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 15:39:50 by ambouren          #+#    #+#             */
-/*   Updated: 2021/12/07 12:40:00 by ambouren         ###   ########.fr       */
+/*   Updated: 2021/12/07 14:48:06 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_putalign(t_flag flag)
 	int		ret;
 
 	c = ' ';
-	if (IS_ZERO(flag.flag) && !(IS_MINUS(flag.flag)))
+	if (ZERO & flag.flag && !(MINUS & flag.flag))
 		c = '0';
 	ret = 0;
 	while (flag.size-- > 0)

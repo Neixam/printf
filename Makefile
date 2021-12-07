@@ -6,7 +6,7 @@
 #    By: ambouren <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 14:43:04 by ambouren          #+#    #+#              #
-#    Updated: 2021/12/07 14:36:34 by ambouren         ###   ########.fr        #
+#    Updated: 2021/12/07 15:35:43 by ambouren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ $(BONUS_O)	:	$(INC_PATH)$(BONUS_I)
 
 $(OBJ_PATH)%.o		:	%.c
 	@mkdir -p obj
-	$(CC) -o $@ -c $< $(CFLAGS) -I $(INC_PATH) -g
+	$(CC) -o $@ -c $< $(CFLAGS) -I $(INC_PATH)
 
 # RULES
 all		:	$(NAME)

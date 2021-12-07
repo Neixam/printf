@@ -6,24 +6,24 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 16:10:43 by ambouren          #+#    #+#             */
-/*   Updated: 2021/12/07 13:04:48 by ambouren         ###   ########.fr       */
+/*   Updated: 2021/12/07 14:54:54 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_BONUS_H
 # define FT_PRINTF_BONUS_H
 
-# define IS_ZERO(x) (x) & 1
-# define IS_MINUS(x) (x) & 2
-# define IS_DOT(x) (x) & 4
-# define IS_HTAG(x) (x) & 8
-# define IS_SPACE(x) (x) & 16
-# define IS_PLUS(x) (x) & 32
+# define ZERO 1
+# define MINUS 2
+# define DOT 4
+# define HTAG 8
+# define SPACE 16
+# define PLUS 32
 
-typedef struct	s_flag
+typedef struct s_flag
 {
-	int flag;
-	int size;
+	int	flag;
+	int	size;
 	int	dot_size;
 }		t_flag;
 

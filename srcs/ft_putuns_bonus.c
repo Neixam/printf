@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 13:03:20 by ambouren          #+#    #+#             */
-/*   Updated: 2021/12/07 13:10:08 by ambouren         ###   ########.fr       */
+/*   Updated: 2021/12/07 14:53:52 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_putuns(void *u, t_flag flag)
 
 	n = *((unsigned int *)u);
 	flag.size -= ft_len(n, 10);
-	if (!(IS_MINUS(flag.flag)))
+	if (!(MINUS & flag.flag))
 		return (ft_putalign(flag) + ft_putuns_aux(n, flag.dot_size));
 	return (ft_putuns_aux(n, flag.dot_size) + ft_putalign(flag));
 }

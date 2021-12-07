@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:58:30 by ambouren          #+#    #+#             */
-/*   Updated: 2021/12/07 13:13:14 by ambouren         ###   ########.fr       */
+/*   Updated: 2021/12/07 15:24:01 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,16 @@ int	ft_putmajhex(void *X, t_flag flag)
 	null.size = 0;
 	n = *((int *)X);
 	flag.size -= ft_len((unsigned int)n, 16);
-	if (IS_HTAG(flag.flag) && n)
+	if (HTAG & flag.flag && n)
 	{
 		flag.size -= 2;
-		if (!(IS_MINUS(flag.flag)))
-			return (ft_putalign(flag) + ft_putstr("0X", null) + ft_putmajhex_aux(n, flag.dot_size));
-		return (ft_putstr("0X", null) + ft_putmajhex_aux(n, flag.dot_size) + ft_putalign(flag));
+		if (!(MINUS & flag.flag))
+			return (ft_putalign(flag) + ft_putstr("0X", null)
+				+ ft_putmajhex_aux(n, flag.dot_size));
+		return (ft_putstr("0X", null) + ft_putmajhex_aux(n, flag.dot_size)
+			+ ft_putalign(flag));
 	}
-	if (!(IS_MINUS(flag.flag)))
+	if (!(MINUS & flag.flag))
 		return (ft_putalign(flag) + ft_putmajhex_aux(n, flag.dot_size));
 	return (ft_putmajhex_aux(n, flag.dot_size) + ft_putalign(flag));
 }

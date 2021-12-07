@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:27:19 by ambouren          #+#    #+#             */
-/*   Updated: 2021/12/07 13:16:41 by ambouren         ###   ########.fr       */
+/*   Updated: 2021/12/07 14:53:23 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ int	ft_putstr(void *s, t_flag flag)
 	if (!s)
 		return (ft_putstr("(null)", null));
 	flag.size -= ft_strlen((char *)s);
-	if (!(IS_MINUS(flag.flag)))
+	if (!(MINUS & flag.flag))
 		ret += ft_putalign(flag);
 	i = 0;
-	while (((char *)s)[i] && (!(IS_DOT(flag.flag)) || i < flag.dot_size))
+	while (((char *)s)[i] && (!(DOT & flag.flag) || i < flag.dot_size))
 		ret += ft_putchar(&((char *)s)[i++], null);
-	if (IS_MINUS(flag.flag))
+	if (MINUS & flag.flag)
 		return (ret + ft_putalign(flag));
 	return (ret);
 }

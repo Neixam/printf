@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:04:33 by ambouren          #+#    #+#             */
-/*   Updated: 2021/11/30 18:16:15 by ambouren         ###   ########.fr       */
+/*   Updated: 2021/12/07 15:24:26 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_choose(int choice, va_list args)
 int	ft_format(const char *fmt, int *i, va_list args)
 {
 	int	ret;
-	
+
 	(*i)++;
 	ret = ft_strichr("cspdiuxX%", fmt[*i]);
 	if (ret == 8)

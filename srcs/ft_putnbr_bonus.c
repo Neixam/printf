@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:59:38 by ambouren          #+#    #+#             */
-/*   Updated: 2021/12/07 13:43:37 by ambouren         ###   ########.fr       */
+/*   Updated: 2021/12/07 15:27:19 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,32 +30,38 @@ int	ft_putnbr_aux(unsigned int n, int dot_size)
 	return (ret + ft_putnbr_aux(n % 10, 0));
 }
 
+int	ft_putnorme(int n, t_flag flag, t_flag null)
+{
+	if (ZERO & flag.flag && !(MINUS & flag.flag))
+		return (ft_putchar("-", null) + ft_putalign(flag)
+			+ ft_putnbr_aux(-n, flag.dot_size));
+	if (!(MINUS & flag.flag))
+		return (ft_putalign(flag) + ft_putchar("-", null)
+			+ ft_putnbr_aux(-n, flag.dot_size));
+	return (ft_putchar("-", null) + ft_putnbr_aux(-n, flag.dot_size)
+		+ ft_putalign(flag));
+}
+
 int	ft_putnbr_chk_flg(int n, t_flag flag, t_flag null)
 {
 	char	c;
 
-	c = '-';
-	if (n >= 0)
-		c = '+';
 	if (n < 0)
+		return (ft_putnorme(n, flag, null));
+	if (!(SPACE & flag.flag) && !(PLUS & flag.flag))
 	{
-		if (IS_ZERO(flag.flag) && !(IS_MINUS(flag.flag)))
-			return (ft_putchar(&c, null) + ft_putalign(flag) + ft_putnbr_aux(-n, flag.dot_size));
-		if (!(IS_MINUS(flag.flag)))
-			return (ft_putalign(flag) + ft_putchar(&c, null) + ft_putnbr_aux(-n, flag.dot_size));
-		return (ft_putchar(&c, null) + ft_putnbr_aux(-n, flag.dot_size) + ft_putalign(flag));
-	}
-	if (!(IS_SPACE(flag.flag)) && !(IS_PLUS(flag.flag)))
-	{
-		if (!(IS_MINUS(flag.flag)))
+		if (!(MINUS & flag.flag))
 			return (ft_putalign(flag) + ft_putnbr_aux(n, flag.dot_size));
 		return (ft_putnbr_aux(n, flag.dot_size) + ft_putalign(flag));
 	}
-	if (!(IS_PLUS(flag.flag)))
+	c = '+';
+	if (!(PLUS & flag.flag))
 		c = ' ';
-	if (!(IS_MINUS(flag.flag)))
-		return (ft_putalign(flag) + ft_putchar(&c, null) + ft_putnbr_aux(n, flag.dot_size));
-	return (ft_putchar(&c, null) + ft_putnbr_aux(n, flag.dot_size) + ft_putalign(flag));
+	if (!(MINUS & flag.flag))
+		return (ft_putalign(flag) + ft_putchar(&c, null)
+			+ ft_putnbr_aux(n, flag.dot_size));
+	return (ft_putchar(&c, null) + ft_putnbr_aux(n, flag.dot_size)
+		+ ft_putalign(flag));
 }
 
 int	ft_putnbr(void *n, t_flag flag)
