@@ -6,7 +6,7 @@
 #    By: ambouren <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 14:43:04 by ambouren          #+#    #+#              #
-#    Updated: 2021/12/04 15:53:04 by ambouren         ###   ########.fr        #
+#    Updated: 2021/12/07 14:36:34 by ambouren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,10 @@ LC		=	ar crs
 CFLAGS	=	-Wall \
 			-Wextra \
 			-Werror
+U_NAME	=	$(shell uname -s)
+ifeq ($(U_NAME), Linux)
+	CFLAGS += -DLINUX
+endif
 INC_PATH=	includes/
 INCLUDES=	ft_printf.h
 BONUS_I	=	ft_printf_bonus.h

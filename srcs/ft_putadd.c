@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:36:21 by ambouren          #+#    #+#             */
-/*   Updated: 2021/11/30 15:11:16 by ambouren         ###   ########.fr       */
+/*   Updated: 2021/12/07 14:36:24 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	ft_putadd_aux(unsigned long ad)
 	return (ret + ft_putadd_aux(ad % 16));
 }
 
+#ifdef LINUX
+
 int	ft_putadd(void *a)
 {
 	int				ret;
@@ -41,3 +43,20 @@ int	ft_putadd(void *a)
 	ret += ft_putadd_aux(ad);
 	return (ret);
 }
+
+#else 
+
+int	ft_putadd(void *a)
+{
+	int				ret;
+	unsigned long	ad;
+
+	if (!a)
+		return (ft_putstr("0x0"));
+	ret = ft_putstr("0x");
+	ad = (unsigned long)a;
+	ret += ft_putadd_aux(ad);
+	return (ret);
+}
+
+#endif

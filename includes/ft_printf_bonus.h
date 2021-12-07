@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 16:10:43 by ambouren          #+#    #+#             */
-/*   Updated: 2021/12/04 15:52:35 by ambouren         ###   ########.fr       */
+/*   Updated: 2021/12/07 13:04:48 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct	s_flag
 {
 	int flag;
 	int size;
+	int	dot_size;
 }		t_flag;
 
 typedef int	(*t_print)(void *, t_flag);
